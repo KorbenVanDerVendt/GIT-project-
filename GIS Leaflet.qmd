@@ -70,3 +70,35 @@ site_long <- c(18+(18/60)+(858/3600), 18+(31/60)+(799/3600), 18+(59/60)+(491/360
 #| echo: true
 site_locations <- data.frame( description= rep('Study site', 17), place_guess= rep('The Cederberg Mountaints', 17),latitude= site_lat, longitude= site_long)
 ```
+
+#cropping beetle observations for only description, place_guess, lat & long
+
+```{r}
+#| echo: true
+beetles_sub <- subset(beetle_obs, select = c("description", "place_guess", 'latitude', 'longitude'))
+```
+
+#merging site locations with beetle observations into one data frame 
+
+```{r}
+#| echo: true
+combined_data <-rbind(beetles_sub, site_locations)
+```
+
+#Adding point types 
+
+```{r}
+#| echo: true
+combined_data$Point_type = ifelse(combined_data$description != 'Study site', 'Observation','plot')
+```
+
+
+
+
+
+
+
+
+
+
+
