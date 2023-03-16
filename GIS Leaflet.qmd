@@ -92,8 +92,27 @@ combined_data <-rbind(beetles_sub, site_locations)
 combined_data$Point_type = ifelse(combined_data$description != 'Study site', 'Observation','plot')
 ```
 
+#converting dataframe into a spatial object 
 
+```{r}
+#| echo: true
+combined_data <- st_as_sf(combined_data, coords = c("longitude", "latitude"), crs = 4326)
+class(combined_data)
+```
 
+#creating leaflet with different colours for different point types 
+
+```{r}
+#| echo: true
+leaflet() %>%
+  # Add default OpenStreetMap map tiles
+  addTiles(urlTemplate = "https://tile.opentopomap.org/{z}/{x}/{y}.png") %>% 
+  # Add our points
+  addCircleMarkers(data = combined_data,
+                   group = "Protea cynaroides",
+                   radius = 3, 
+                   color = ifelse(combined_data$Point_type == 'plot', "black", "red"))
+```
 
 
 
