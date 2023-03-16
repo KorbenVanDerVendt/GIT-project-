@@ -1,0 +1,37 @@
+---
+title: "Leaflet"
+format: html
+editor: visual
+---
+
+#Korben Van Der Vendt
+
+#clear working environment
+
+```{r}
+#| echo: true
+rm(list = ls())
+```
+
+#installing packages
+
+```{r}
+#| echo: true
+library(rinat) 
+library(magrittr) 
+library(sf) 
+library(leaflet) 
+library(htmltools) 
+
+```
+
+#calling and inspecting data from iNaturalist
+
+```{r}
+#| echo: true
+beetle_obs <- get_inat_obs(taxon_name = "Anthia decemguttata",
+                           maxresults = 1000)
+head(beetle_obs)
+colnames(beetle_obs)
+```
+
